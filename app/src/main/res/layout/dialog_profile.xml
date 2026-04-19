@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/card_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="300dp">
+
+<!--    &lt;!&ndash; Profile Image &ndash;&gt;-->
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/profileImage"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:src="@drawable/pfp_img"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        android:background="@drawable/card_bg"-->
+<!--        android:layout_marginBottom="10dp"/>-->
+
+<!--    <TextView-->
+<!--        android:text="Tap to change photo"-->
+<!--        android:textSize="12sp"-->
+<!--        android:textColor="@color/text_secondary"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
+
+    <!-- Name -->
+    <EditText
+        android:id="@+id/etName"
+        android:hint="Name"
+        android:background="@drawable/card_bg"
+        android:padding="14dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:inputType="text"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"/>
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:hint="Email"
+        android:background="@drawable/card_bg"
+        android:padding="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:inputType="textEmailAddress"/>
+
+    <!-- Phone -->
+    <EditText
+        android:id="@+id/etPhone"
+        android:hint="Phone"
+        android:background="@drawable/card_bg"
+        android:padding="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:inputType="phone"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btnSaveProfile"
+        android:text="Save"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:text="Logout"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

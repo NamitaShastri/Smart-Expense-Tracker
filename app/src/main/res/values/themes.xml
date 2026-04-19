@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base Theme -->
+    <style name="Base.Theme.SmartExpenseTracker" parent="Theme.Material3.DayNight.NoActionBar" />
+
+    <!-- App Theme -->
+    <style name="Theme.SmartExpenseTracker" parent="Base.Theme.SmartExpenseTracker" />
+
+    <!-- Circle Image Style -->
+    <style name="CircleImage" parent="ShapeAppearance.Material3.Corner.Full">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Theme.SmartExpenseTracker.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+    </style>
+
+</resources>

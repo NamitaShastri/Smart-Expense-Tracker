@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#6C63FF</color>
+    <color name="background">#F8F9FF</color>
+    <color name="text_primary">#2D2D2D</color>
+    <color name="text_secondary">#888888</color>
+    <color name="white">#FFFFFF</color>
+    <color name="essential_color">#4CAF50</color>
+    <color name="lifestyle_color">#9C27B0</color>
+    <color name="transport_color">#2196F3</color>
+    <color name="utilities_color">#FF9800</color>
+</resources>
