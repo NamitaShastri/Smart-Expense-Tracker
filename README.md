@@ -30,9 +30,7 @@ This application was developed as a practical Android development project to str
 Version 1 includes core expense tracking functionality with a strong foundation for future improvements.
 
 ## Planned Enhancements
-- Delete Expense Feature
-- Date-Based Filters
-- Category Color Indicators
+- The scan image feature will be able to fill all the required fields 
 - Expense Analytics Dashboard
 - Budget Planning Tools
 - Improved UI Design
