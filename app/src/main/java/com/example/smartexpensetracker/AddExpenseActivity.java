@@ -1,5 +1,6 @@
 package com.example.smartexpensetracker;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -38,7 +39,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     String selectedCategory = "Essentials";
     Uri imageUri;
-    ProgressDialog progressDialog;
+    Dialog progressDialog;
 
     private static final int PICK_IMAGE = 1;
     private static final int CAMERA_REQUEST = 101;
@@ -61,8 +62,8 @@ public class AddExpenseActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         btnScan = findViewById(R.id.btnScan);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Extracting amount...");
+        progressDialog = new Dialog(this);
+        progressDialog.setContentView(R.layout.loading_dialog);
         progressDialog.setCancelable(false);
 
         dbHelper = new DatabaseHelper(this);
@@ -114,7 +115,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     private void showImagePickerDialog() {
         String[] options = {"Camera", "Gallery"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         builder.setTitle("Select Option");
 
         builder.setItems(options, (dialog, which) -> {
@@ -221,6 +222,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     // 💎 OCR SCAN
     private void scanTextFromImage(Uri uri) {
         progressDialog.show();
+
         try {
             InputImage image = InputImage.fromFilePath(this, uri);
 

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     int currentUserId;
     private static final int PICK_IMAGE_PROFILE = 100;
     private Uri selectedImageUri;
-    private ImageView dialogProfileImage; // IMPORTANT
+    private ImageView dialogProfileImage;
 
     TextView tvCount, tvAvg;
     TextView tvDailyBudget;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         createNotificationChannel();
 
-        // Initialize views
+
         tvName = findViewById(R.id.tvName);
         tvTotal = findViewById(R.id.tvTotal);
         LinearLayout headerLayout = findViewById(R.id.headerLayout);
@@ -70,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
         tvDailyBudget = findViewById(R.id.tvDailyBudget);
         progressBudget = findViewById(R.id.progressBudget);
         TextView tvGreeting = findViewById(R.id.tvGreeting);
+
+        if (android.os.Build.VERSION.SDK_INT >= 33) {
+            requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+        }
 
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 
@@ -119,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         loadDailyBudget();
         // Profile click
 //        profileIcon.setOnClickListener(v -> showProfileDialog());
-
+        insertDummyDataIfNeeded();
         // Navigation
         btnAdd.setOnClickListener(v ->
                 startActivity(new Intent(this, AddExpenseActivity.class))
@@ -193,9 +197,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkDailyLimitAndNotify(double total, float limit) {
 
-        if (limit > 0 && total >= limit && total < limit + 50) {
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+
+        double lastTotal = Double.longBitsToDouble(
+                prefs.getLong("last_total", Double.doubleToLongBits(0))
+        );
+
+        // 🔥 Trigger ONLY when crossing limit
+        if (limit > 0 && lastTotal < limit && total >= limit) {
             showBudgetNotification();
         }
+
+        // ✅ Save current total for next comparison
+        prefs.edit().putLong(
+                "last_total",
+                Double.doubleToLongBits(total)
+        ).apply();
     }
 
     // 💎 Profile Dialog
@@ -264,8 +281,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dialog.show();
+        dialog.getWindow().setSoftInputMode(
+                android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+        );
     }
     private void loadDailyBudget() {
+
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+
+        String today = new java.text.SimpleDateFormat("yyyy-MM-dd",
+                java.util.Locale.getDefault()).format(new java.util.Date());
+
+        String lastDate = prefs.getString("last_checked_date", "");
+
+        if (!today.equals(lastDate)) {
+
+            prefs.edit()
+                    .putBoolean("limit_notified", false) // 🔄 reset
+                    .putString("last_checked_date", today)
+                    .apply();
+        }
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -282,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
 
         cursor.close();
 
-        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
         float limit = prefs.getFloat("daily_limit", 0);
 
         tvDailyBudget.setText("₹" + total + " / ₹" + limit);
@@ -329,5 +363,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void insertDummyDataIfNeeded() {
+
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean added = prefs.getBoolean("dummy_added", false);
+
+        if (added) return; // ❌ don’t insert again
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // 👇 Dummy data
+        db.execSQL("INSERT INTO expenses (user_id, amount, category, note, date) VALUES " +
+                "(" + currentUserId + ", 120, 'Food', 'Lunch', date('now'))," +
+                "(" + currentUserId + ", 250, 'Transport', 'Auto', date('now','-1 day'))," +
+                "(" + currentUserId + ", 500, 'Shopping', 'Clothes', date('now','-2 day'))," +
+                "(" + currentUserId + ", 800, 'Bills', 'Electricity', date('now','-5 day'))," +
+                "(" + currentUserId + ", 1000, 'Food', 'Dinner', date('now','start of month'))," +
+                "(" + currentUserId + ", 1500, 'Shopping', 'Shoes', date('now','-1 month'))"
+        );
+
+        prefs.edit().putBoolean("dummy_added", true).apply();
+    }
 
 }

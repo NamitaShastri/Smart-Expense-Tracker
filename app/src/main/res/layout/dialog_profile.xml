@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -32,39 +39,39 @@
     <EditText
         android:id="@+id/etName"
         android:hint="Name"
-        android:background="@drawable/card_bg"
-        android:padding="14dp"
-        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:inputType="text"
-        android:textColor="@color/text_primary"
-        android:textColorHint="@color/text_secondary"/>
+        android:layout_height="50dp"
 
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
+        android:textColor="@color/text_primary"
+        android:background="@drawable/card_bg"
+        android:textSize="16sp"/>
     <!-- Email -->
     <EditText
         android:id="@+id/etEmail"
         android:hint="Email"
-        android:background="@drawable/card_bg"
-        android:padding="14dp"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:inputType="textEmailAddress"/>
+        android:layout_height="50dp"
+        android:textColor="@color/text_primary"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
+
+        android:background="@drawable/card_bg"
+        android:textSize="16sp"/>
 
     <!-- Phone -->
     <EditText
         android:id="@+id/etPhone"
         android:hint="Phone"
-        android:background="@drawable/card_bg"
-        android:padding="14dp"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:inputType="phone"
+        android:layout_height="50dp"
         android:textColor="@color/text_primary"
-        android:textColorHint="@color/text_secondary"/>
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
 
+        android:background="@drawable/card_bg"
+        android:textSize="16sp"/>
     <!-- Save Button -->
     <Button
         android:id="@+id/btnSaveProfile"
@@ -76,7 +83,8 @@
         android:background="@drawable/button_bg"
         android:textColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:backgroundTint="#6830CC"/>
 
     <Button
         android:id="@+id/btnLogout"
@@ -88,6 +96,8 @@
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        app:backgroundTint="#6830CC"/>
 
 </LinearLayout>
+</ScrollView>
