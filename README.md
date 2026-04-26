@@ -14,9 +14,9 @@ This project was built to provide an easy-to-use personal finance management sol
 
 ## Tech Stack
 - Android Studio
-- Java / Kotlin
+- Java 
 - XML (UI Design)
-- SQLite / Firebase (based on implementation)
+- SQLite
 
 ## Purpose
 This application was developed as a practical Android development project to strengthen skills in:
